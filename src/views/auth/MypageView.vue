@@ -4,9 +4,9 @@
     <div class="card">
       <h3 class="mb-2">개인정보 관리</h3>
       <div class="flex flex-col gap-2">
-        <input type="text" placeholder="이름" class="search-box" />
+        <input type="text" placeholder="Forge" class="search-box readonly-field" readonly="readonly"/>
+        <input type="email" placeholder="tjtmdrbs@naver.com" class="search-box readonly-field" readonly="readonly"/>
         <input type="text" placeholder="닉네임" class="search-box" />
-        <input type="email" placeholder="이메일" class="search-box" />
         <input type="text" placeholder="핸드폰 번호" class="search-box" />
 
         <div class="flex gap-2 justify-center mt-2">
@@ -20,7 +20,7 @@
     <div class="card">
       <h3 class="mb-2">비밀번호 변경</h3>
       <div class="flex flex-col gap-2">
-        <input type="password" placeholder="현재 비밀번호" class="search-box" />
+<!--        <input type="password" placeholder="현재 비밀번호" class="search-box" />-->
         <input type="password" placeholder="새 비밀번호" class="search-box" />
         <input type="password" placeholder="새 비밀번호 확인" class="search-box" />
 

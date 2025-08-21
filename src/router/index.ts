@@ -7,6 +7,12 @@ import FindIdView from '@/views/auth/FindIdView.vue'
 import FindPasswordView from '@/views/auth/FindPasswordView.vue'
 import HomeView from '@/views/home/HomeView.vue'
 import MypageView from '@/views/auth/MypageView.vue'
+import NoticeReports from '@/views/reports/NoticeReports.vue'
+import NoticeAdminList from '@/views/reports/NoticeAdminList.vue'
+import NoticeList from '@/views/common/NoticeList.vue'
+import NoticeForm from '@/views/reports/NoticeForm.vue'
+import NoticeDetail from '@/views/common/NoticeDetail.vue'
+import ProcessingStatusView from '@/views/admin/ProcessingStatusView.vue'
 
 const routes = [
     { path: '/', name: 'home', component: HomeView },
@@ -15,6 +21,12 @@ const routes = [
     { path: '/find-id', name: 'findId', component: FindIdView },
     { path: '/find-password', name: 'findPassword', component: FindPasswordView },
     { path: '/mypage', name: 'mypage', component: MypageView },
+    { path: '/noticeReports', name: 'noticeReports', component: NoticeReports },
+    { path: '/noticeAdminList', name: 'noticeAdminList', component: NoticeAdminList },
+    { path: '/noticeList', name: 'noticeList', component: NoticeList },
+    { path: '/noticeForm', name: 'noticeCreate', component: NoticeForm },
+    { path: '/noticeDetail', name: 'noticeDetail', component: NoticeDetail },
+    { path: '/processingStatusView', name: 'processingStatusView', component: ProcessingStatusView },
 ]
 
 const router = createRouter({

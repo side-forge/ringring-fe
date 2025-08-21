@@ -57,12 +57,14 @@ const handleSearch = (query: string) => {
       <!-- 검색 결과 표시 -->
       <div v-if="hasSearched" class="search-result-container fade-in">
         <!-- 액션 버튼들 -->
-        <div class="action-icons">
+        <div class="action-icons top-right">
           <input
               type="text"
               class="file-name-input"
               :value="attachedFileName"
               readonly
+              placeholder="첨부된 파일이 없습니다"
+              style="padding-left: 15px;"
           />
           <button @click="handleAttachFile" class="icon-btn">
             <img src="/src/assets/images/attch_file.png" alt="파일 첨부" />
@@ -89,16 +91,16 @@ const handleSearch = (query: string) => {
         </div>
 
         <!-- 오른쪽 상단: 액션 버튼과 파일명 -->
-        <div class="action-area">
-          <!-- 파일명 표시 텍스트박스 -->
-          <input
-              v-if="attachedFileName"
-              type="text"
-              class="file-name-box"
-              :value="attachedFileName"
-              readonly
-          />
-        </div>
+<!--        <div class="action-area">-->
+<!--          &lt;!&ndash; 파일명 표시 텍스트박스 &ndash;&gt;-->
+<!--          <input-->
+<!--              v-if="attachedFileName"-->
+<!--              type="text"-->
+<!--              class="file-name-box"-->
+<!--              :value="attachedFileName"-->
+<!--              readonly-->
+<!--          />-->
+<!--        </div>-->
       </div>
     </section>
 
@@ -111,9 +113,9 @@ const handleSearch = (query: string) => {
 
     <!-- 차트 섹션 - 나중에 구현 -->
     <section class="card">
-      <h3>신고 현황 추이</h3>
+      <h3>{{ hasSearched ? '투표 상태' : '신고 현황 추이' }}</h3>
       <div class="placeholder-box">
-        <p class="placeholder-text">차트 영역</p>
+        <p class="placeholder-text">{{ hasSearched ? '로그인을 해야 투표 가능합니다.' : '차트 영역' }}</p>
       </div>
     </section>
   </main>

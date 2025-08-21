@@ -5,8 +5,8 @@ import { computed } from 'vue'
 
 // 컴포넌트 동적 import
 // import GuestHome from './GuestHome.vue'
-import UserHome from './UserHome.vue'
-// import AdminHome from './UserHome.vue'
+// import UserHome from './UserHome.vue'
+import AdminHome from './AdminHome.vue'
 
 // 인증 상태 관리
 // const authStore = useAuthStore() // Pinia 사용 시
@@ -14,7 +14,9 @@ import UserHome from './UserHome.vue'
 
 // 현재 표시할 컴포넌트 결정 (일단 GuestHome만)
 const currentComponent = computed(() => {
-  return UserHome
+  // return GuestHome
+  // return UserHome
+  return AdminHome
 
   // 나중에 인증 기능 추가할 때 사용
   // if (!authStore.isLoggedIn) {
