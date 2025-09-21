@@ -35,15 +35,21 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const auth = useAuthStore()
+    const authStore = useAuthStore();
 
-    const authRequiredRoutes = []
-
-    if (authRequiredRoutes.includes(to.name as string) && !auth.isLoggedIn) {
-        next({ name: 'login' })
-    } else {
-        next()
+    // 인증이 필요한 페이지
+    if (to.meta.requiresAuth && !authStore.isLoggedIn) {
+        next('/login');
+        return;
     }
+
+    // 관리자 권한이 필요한 페이지
+    if (to.meta.requiresAdmin && !authStore.isAdmin) {
+        next('/'); // 또는 권한 없음 페이지
+        return;
+    }
+
+    next();
 })
 
 export default router

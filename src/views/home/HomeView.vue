@@ -1,47 +1,42 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-// import { useAuthStore } from '@/stores/auth' // Pinia 사용 시
-// import { mapGetters } from 'vuex' // Vuex 사용 시
+import { computed, onMounted } from 'vue'
+import { defineAsyncComponent } from 'vue'
+import { useAuthStore } from '@/stores/auth'
 
-// 컴포넌트 동적 import
-// import GuestHome from './GuestHome.vue'
-// import UserHome from './UserHome.vue'
-import AdminHome from './AdminHome.vue'
+// 코드 스플리팅(선택)
+const GuestHome = defineAsyncComponent(() => import('./GuestHome.vue'))
+const UserHome  = defineAsyncComponent(() => import('./UserHome.vue'))
+const AdminHome = defineAsyncComponent(() => import('./AdminHome.vue'))
 
-// 인증 상태 관리
-// const authStore = useAuthStore() // Pinia 사용 시
-// const { isLoggedIn, userRole } = mapGetters('auth', ['isLoggedIn', 'userRole']) // Vuex 사용 시
+const auth = useAuthStore()
 
-// 현재 표시할 컴포넌트 결정 (일단 GuestHome만)
+// 새로고침 시 저장소 복원
+onMounted(() => {
+  auth.initializeAuth()
+})
+
+/**
+ * 역할 기반 컴포넌트 선택
+ * - 미로그인: GuestHome
+ * - ROLE_ADMIN: AdminHome
+ * - ROLE_USER: UserHome
+ * - 그 외: GuestHome
+ */
 const currentComponent = computed(() => {
-  // return GuestHome
-  // return UserHome
-  return AdminHome
-
-  // 나중에 인증 기능 추가할 때 사용
-  // if (!authStore.isLoggedIn) {
-  //   return GuestHome
-  // }
-
-  // switch (authStore.userRole) {
-  //   case 'admin':
-  //     return AdminHome
-  //   case 'manager':
-  //     return AdminHome // 매니저도 관리자 화면 사용하거나 별도 컴포넌트 생성
-  //   case 'user':
-  //   default:
-  //     return UserHome
-  // }
+  if (!auth.isLoggedIn || !auth.user) return GuestHome
+  if (auth.isAdmin) return AdminHome
+  if (auth.isUser)  return UserHome
+  return GuestHome
 })
 </script>
 
 <template>
   <div class="container">
-    <!-- 동적 컴포넌트 렌더링 -->
-    <component :is="currentComponent" />
+    <Suspense>
+      <component :is="currentComponent" />
+      <template #fallback>
+        <div style="padding:24px">로딩 중…</div>
+      </template>
+    </Suspense>
   </div>
 </template>
-
-<style scoped>
-/* 필요한 경우 HomeView 전용 스타일 */
-</style>
